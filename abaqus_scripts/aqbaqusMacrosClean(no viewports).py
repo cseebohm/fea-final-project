@@ -106,14 +106,13 @@ def PlateWithHole():
     session.mdbData.summary()
     o3 = session.openOdb(name='C:/temp/Job-1.odb')
     a = m.rootAssembly
-    #a = m.rootAssembly
-    #o3 = session.openOdb(name='C:/temp/Approx005V1.odb')
-    #session.mdbData.summary()
     odb = session.odbs['C:/temp/Job-1.odb']
     
     # this will be in ti's own get CSV script
     # Convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
+    session.viewports['Viewport: 1'].setValues(displayedObject=o1)
+    session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     session.writeFieldReport(fileName='X:/Desktop/PlateWithHole.csv', append=ON, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
         variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
