@@ -5,7 +5,7 @@ this script defines a function to make a model, it does not loop
 @author Clarissa Seebohm and Audrey Pohl
 """
 
-def make_model (modelName, partName, pathName, radius):
+def make_model (modelName, partName, pathName, radius, seedSize):
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
@@ -82,7 +82,7 @@ def make_model (modelName, partName, pathName, radius):
     pickedRegions =(faces, )
     p.setElementType(regions=pickedRegions, elemTypes=(elemType1, elemType2))
 
-    p.seedPart(size=0.005, deviationFactor=0.1, minSizeFactor=0.1)
+    p.seedPart(size=seedSize, deviationFactor=0.1, minSizeFactor=0.1)
     p.generateMesh()
     a.regenerate()
     

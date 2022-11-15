@@ -115,7 +115,7 @@ def PlateWithHole():
     a = m.rootAssembly
     odb = session.odbs['C:/temp/Job-1.odb']
     
-    # this will be in ti's own get CSV script
+    # this will be in it's own get CSV script
     # Convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)

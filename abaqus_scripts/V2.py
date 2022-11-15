@@ -18,13 +18,15 @@ from output_data import output_data
 #define part, paths, and filenames
 pathName='X:/.win_desktop/PlateWithHole'
 fileName='X:/.win_desktop/PlateWithHole.csv'
+
 modelName='Model-1'
 partName='PlateWithHole'
 
+seedSize = 0.005
 radius = 0.1125
 
 #make model
-make_model(modelName, partName, pathName,  radius)
+make_model(modelName, partName, pathName,  radius, seedSize)
 
 #submit job
 
