@@ -121,4 +121,6 @@ def PlateWithHole():
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
     
+    # file name must match the folder you're running the script from
+    
 PlateWithHole()
