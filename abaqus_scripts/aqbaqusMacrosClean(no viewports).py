@@ -104,12 +104,12 @@ def PlateWithHole():
     
     # Get ODB
     session.mdbData.summary()
-    o3 = session.openOdb(name='C:/temp/Approx005V1.odb')
+    o3 = session.openOdb(name='C:/temp/Job-1.odb')
     a = m.rootAssembly
     #a = m.rootAssembly
     #o3 = session.openOdb(name='C:/temp/Approx005V1.odb')
     #session.mdbData.summary()
-    odb = session.odbs['C:/temp/Approx005V1.odb']
+    odb = session.odbs['C:/temp/Job-1.odb']
     
     # this will be in ti's own get CSV script
     # Convert ODB to CSV for readable data
