@@ -1,7 +1,7 @@
 """
 this script is a commented macro to do all abaqus steps once
 
-@version 10-15-2022
+@version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
 
