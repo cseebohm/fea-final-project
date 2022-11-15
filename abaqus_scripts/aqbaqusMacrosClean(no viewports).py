@@ -88,7 +88,6 @@ def PlateWithHole():
     a.regenerate()
     
     
-    
     # this will be in it's own submit job script
     #CREATE JOB
     mdb.Job(name='Job-1', model='Model-1', description='', type=ANALYSIS, 
