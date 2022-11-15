@@ -29,7 +29,7 @@ def PlateWithHole():
     del m.sketches['__profile__']
 
     #SAVE
-    mdb.saveAs(pathName='X:/PlateWithHole')
+    mdb.saveAs(pathName='X:/Desktop/PlateWithHole')
     
     #MAKE MATERIAL
     m.Material(name='Steel')
@@ -114,7 +114,7 @@ def PlateWithHole():
     # this will be in ti's own get CSV script
     # Convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
-    session.writeFieldReport(fileName='X:/Desktop/DataPlateWHoleV1.csv', append=ON, 
+    session.writeFieldReport(fileName='X:/Desktop/PlateWithHole.csv', append=ON, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
         variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
         'Max. In-Plane Principal'), (INVARIANT, 
@@ -122,5 +122,8 @@ def PlateWithHole():
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
     
     # file name must match the folder you're running the script from
+    # directories must match format as:
+        # (X:/whateverpathyouwant/PartFilename) and
+        # (X:/whateverpathyouwant/DataFilename.csv) 
     
 PlateWithHole()
