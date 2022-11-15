@@ -16,9 +16,7 @@ def PlateWithHole():
     import mesh
     import displayGroupOdbToolset as dgo
 
-    #DEFINE PATHS AND FILENAMES
-    pathName='X:/.win_desktop/PlateWithHole'
-    fileName='X:/.win_desktop/PlateWithHole.csv'
+
 
     m = mdb.models['Model-1']
     

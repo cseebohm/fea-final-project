@@ -1,0 +1,29 @@
+"""
+this script is a test for the functions, it should run the exact same as V1.py
+
+@version 11-15-2022
+@author Clarissa Seebohm and Audrey Pohl
+"""
+
+# -*- coding: mbcs -*-
+# Do not delete the following import lines
+from abaqus import *
+from abaqusConstants import *
+import __main__
+
+from make_model import make_model
+from submit_job import submit_job
+from output_data import output_data
+
+#define part, paths, and filenames
+pathName='X:/.win_desktop/PlateWithHole'
+fileName='X:/.win_desktop/PlateWithHole.csv'
+
+radius = 0.1125
+
+#make model
+make_model(pathName, radius)
+
+#submit job
+
+#output data
