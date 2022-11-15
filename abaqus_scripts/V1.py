@@ -1,3 +1,10 @@
+"""
+this script is a commented macro to do all abaqus steps once
+
+@version 10-15-2022
+@author Clarissa Seebohm and Audrey Pohl
+"""
+
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
 from abaqus import *
@@ -31,9 +38,6 @@ def PlateWithHole():
     s.unsetPrimaryObject()
 
     del m.sketches['__profile__']
-
-    #SAVE
-    mdb.saveAs(pathName)
     
     #MAKE MATERIAL
     m.Material(name='Steel')
@@ -91,6 +95,8 @@ def PlateWithHole():
     p.generateMesh()
     a.regenerate()
     
+    #SAVE
+    mdb.saveAs(pathName)
     
     # this will be in it's own submit job script
     #CREATE JOB
