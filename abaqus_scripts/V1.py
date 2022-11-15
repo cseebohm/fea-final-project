@@ -9,6 +9,10 @@ def PlateWithHole():
     import mesh
     import displayGroupOdbToolset as dgo
 
+    #DEFINE PATHS AND FILENAMES
+    pathName='X:/.win_desktop/PlateWithHole'
+    fileName='X:/.win_desktop/PlateWithHole.csv'
+
     m = mdb.models['Model-1']
     
     #GEOMETRY
@@ -29,7 +33,7 @@ def PlateWithHole():
     del m.sketches['__profile__']
 
     #SAVE
-    mdb.saveAs(pathName='X:/Desktop/PlateWithHole')
+    mdb.saveAs(pathName)
     
     #MAKE MATERIAL
     m.Material(name='Steel')
@@ -103,7 +107,7 @@ def PlateWithHole():
     
     # Get ODB
     session.mdbData.summary()
-    o3 = session.openOdb(name='C:/temp/Job-1.odb')
+    o1 = session.openOdb(name='C:/temp/Job-1.odb')
     a = m.rootAssembly
     odb = session.odbs['C:/temp/Job-1.odb']
     
@@ -112,16 +116,11 @@ def PlateWithHole():
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
-    session.writeFieldReport(fileName='X:/Desktop/PlateWithHole.csv', append=ON, 
+    session.writeFieldReport(fileName, append=OFF, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
         variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
         'Max. In-Plane Principal'), (INVARIANT, 
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
-    
-    # file name must match the folder you're running the script from
-    # directories must match format as:
-        # (X:/whateverpathyouwant/PartFilename) and
-        # (X:/whateverpathyouwant/DataFilename.csv) 
     
 PlateWithHole()
