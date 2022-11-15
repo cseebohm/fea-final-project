@@ -5,12 +5,12 @@ this script defines a function to make a model, it does not loop
 @author Clarissa Seebohm and Audrey Pohl
 """
 
-def make_model (pathName, radius):
+def make_model (modelName, partName, pathName, radius):
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
 
-    m = mdb.models['Model-1']
+    m = mdb.models[modelName]
     
     #GEOMETRY
     s = m.ConstrainedSketch(name='__profile__', sheetSize=5.0)
@@ -21,7 +21,7 @@ def make_model (pathName, radius):
     s.CircleByCenterPerimeter(center=(0.1, 0.1), point1=(0.1, radius))
     
     #MAKE PART
-    p = m.Part(name='PlateWithHole', 
+    p = m.Part(name=partName, 
         dimensionality=TWO_D_PLANAR, type=DEFORMABLE_BODY)
     
     p.BaseShell(sketch=s)
@@ -46,21 +46,22 @@ def make_model (pathName, radius):
     a = m.rootAssembly
     
     #CREATE INSTANCE
+    instanceName = partName+'-1'
     a.DatumCsysByDefault(CARTESIAN)
-    a.Instance(name='PlateWithHole-1', part=p, dependent=ON)
+    a.Instance(name=instanceName, part=p, dependent=ON)
     
-    #STEPS
+    #STEPS, BOUNDARY CONDITIONS, AND LOADS
     m.StaticStep(name='Step-1', previous='Initial')
     
     m.steps['Step-1'].setValues(description='')
     
-    e1 = a.instances['PlateWithHole-1'].edges
+    e1 = a.instances[instanceName].edges
     edges1 = e1.getSequenceFromMask(mask=('[#10 ]', ), )
     region = a.Set(edges=edges1, name='Set-1')
     
     m.EncastreBC(name='FixedLeftEdge', createStepName='Initial', region=region, localCsys=None)
     
-    s1 = a.instances['PlateWithHole-1'].edges
+    s1 = a.instances[instanceName].edges
     side1Edges1 = s1.getSequenceFromMask(mask=('[#4 ]', ), )
     
     region = a.Surface(side1Edges=side1Edges1, name='Surf-1')
@@ -70,7 +71,7 @@ def make_model (pathName, radius):
         field='', magnitude=-1000000.0, amplitude=UNSET)
     
     #MESH PART    
-    p1 = m.parts['PlateWithHole']
+    p1 = m.parts[partName]
     
     elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD, 
         secondOrderAccuracy=OFF, hourglassControl=DEFAULT, 
