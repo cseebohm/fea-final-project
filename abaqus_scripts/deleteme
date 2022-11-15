@@ -1,2 +1,0 @@
-session.viewports['Viewport: 1'].setValues(displayedObject=o1)
-session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
