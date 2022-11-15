@@ -4,7 +4,7 @@ from abaqus import *
 from abaqusConstants import *
 import __main__
 
-def Macro1():
+def PlateWithHole():
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
@@ -121,4 +121,4 @@ def Macro1():
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
     
-    
+PlateWithHole()
