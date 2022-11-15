@@ -104,7 +104,7 @@ def PlateWithHole():
     
     # Get ODB
     session.mdbData.summary()
-    o3 = session.openOdb(name='C:/temp/Job-1.odb')
+    o1 = session.openOdb(name='C:/temp/Job-1.odb')
     a = m.rootAssembly
     odb = session.odbs['C:/temp/Job-1.odb']
     
