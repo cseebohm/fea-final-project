@@ -16,8 +16,6 @@ def PlateWithHole():
     import mesh
     import displayGroupOdbToolset as dgo
 
-
-
     m = mdb.models['Model-1']
     
     #GEOMETRY
