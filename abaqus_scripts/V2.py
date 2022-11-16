@@ -15,13 +15,14 @@ from make_model import make_model
 from submit_job import submit_job
 from output_data import output_data
 
-#define part, paths, and filenames
+#define paths and filenames
 pathName='X:/.win_desktop/PlateWithHole'
 fileName='X:/.win_desktop/PlateWithHole.csv'
 
 modelName='Model-1'
 partName='PlateWithHole'
 
+#define part 
 seedSize = 0.005
 radius = 0.1125
 
@@ -29,5 +30,7 @@ radius = 0.1125
 make_model(modelName, partName, pathName,  radius, seedSize)
 
 #submit job
+o1, odb = submit_job()
 
 #output data
+output_data(o1, odb, fileName)
