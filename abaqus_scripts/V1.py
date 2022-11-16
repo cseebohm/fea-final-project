@@ -17,6 +17,9 @@ def PlateWithHole():
     import displayGroupOdbToolset as dgo
 
     m = mdb.models['Model-1']
+
+    pathName='X:/.win_desktop/PlateWithHole'
+    fileName='X:/.win_desktop/PlateWithHole.csv'
     
     #GEOMETRY
     s = m.ConstrainedSketch(name='__profile__', sheetSize=5.0)
