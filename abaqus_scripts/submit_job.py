@@ -11,9 +11,10 @@ inputs are as follows
 @author Clarissa Seebohm and Audrey Pohl
 """
 
-def submit_job(modelName, jobName, pathName):
+def submit_job(jobName, pathName):
     
-    m = mdb.models[modelName] # not sure if this line is nessecary 
+    # open mdb object
+    mdb = openMdb(pathName)
     
     #CREATE JOB
     mdb.Job(name=jobName, model=modelName, description='', type=ANALYSIS, 
@@ -29,11 +30,12 @@ def submit_job(modelName, jobName, pathName):
     
     # Get ODB
     session.mdbData.summary()
-    o1 = session.openOdb(path=pathName) # this creates an odb object from the file at the dictated path
+    odb = session.openOdb(path=pathName) # this creates an odb object from the file at the dictated path
     # name = '' specifies the name of the repository key (idk what that means)
     # path = '' specifies where the odb is that you want to open
     
     a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
-    odb = session.odbs[pathName] # don't know what the "odbs" is here... 
+
+    odb.saveAs(pathName)
     
-    return o1, odb # we might only need one of these. What's the difference between the two? 
+    #return o1, odb # we might only need one of these. What's the difference between the two? 
