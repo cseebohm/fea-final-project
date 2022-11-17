@@ -36,4 +36,4 @@ def submit_job(modelName, jobName, pathName):
     a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
     odb = session.odbs[pathName] # don't know what the "odbs" is here... 
     
-    return o1, odb
+    return o1, odb # we might only need one of these. What's the difference between the two? 

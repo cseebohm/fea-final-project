@@ -1,6 +1,11 @@
 """
 this script defines a function to output data as a csv from an odb, it does not loop
 
+inputs are as follows 
+    - o1 is your odb object generated in submit_job
+    - odb is your... idk what's different about this than the o1
+    - fileName is what you'll name your .csv file as a string 'My-csv'
+
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
@@ -22,3 +27,5 @@ def output_data (o1, odb, fileName):
         'Max. In-Plane Principal'), (INVARIANT, 
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
+    
+    
