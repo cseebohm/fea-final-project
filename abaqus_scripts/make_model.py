@@ -1,6 +1,15 @@
 """
 this script defines a function to make a model, it does not loop
 
+inputs are as follows
+    - the name of the model as a string 'Model-1' 
+    - the name of the part relative to the model each model will generate a new part 'Part-1'
+    # not sure about this ^^ I believe the part name will stay constant and just the model will get renamed? 
+    # since the part names are relative to and within the model
+    - path name of where you want your model to be saved
+    - radius of the circle as a float type
+    - seed size as a float type
+    
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
