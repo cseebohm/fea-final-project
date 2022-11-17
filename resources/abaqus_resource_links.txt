@@ -1,0 +1,2 @@
+http://dsk-016-1.fsid.cvut.cz:2080/v6.12/pdf_books/SCRIPT_USER.pdf
+https://classes.engineering.wustl.edu/2009/spring/mase5513/abaqus/docs/v6.6/books/ker/default.htm?startat=pt01ch27pyo01.html
