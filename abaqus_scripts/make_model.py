@@ -2,13 +2,13 @@
 this script defines a function to make a model, it does not loop
 
 inputs are as follows
-    - the name of the model as a string 'Model-1' 
-    - the name of the part relative to the model each model will generate a new part 'Part-1'
+    - what you want the model to be called as a string 'My-Model' 
+    - name of your part relative to the model each model will generate a new part 'My-Part'
     # not sure about this ^^ I believe the part name will stay constant and just the model will get renamed? 
     # since the part names are relative to and within the model
-    - path name of where you want your model to be saved
-    - radius of the circle as a float type
-    - seed size as a float type
+    - path name of where you want your model to be saved as a string 'C:/Desktop'
+    - radius of the circle as a float type 4.2
+    - seed size as a float type 0.005
     
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
@@ -91,7 +91,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     pickedRegions =(faces, )
     p.setElementType(regions=pickedRegions, elemTypes=(elemType1, elemType2))
 
-    p.seedPart(size=seedSize, deviationFactor=0.1, minSizeFactor=0.1)
+    p.seedPart(size=seedSize, deviationFactor=0.1, minSizeFactor=0.1) # do we need seedSize to be an input here? 
     p.generateMesh()
     a.regenerate()
     

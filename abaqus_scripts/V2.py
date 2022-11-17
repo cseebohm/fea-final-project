@@ -30,7 +30,7 @@ radius = 0.1125
 make_model(modelName, partName, pathName,  radius, seedSize)
 
 #submit job
-o1, odb = submit_job()
+o1, odb = submit_job(modelName, )
 
 #output data
 output_data(o1, odb, fileName)
