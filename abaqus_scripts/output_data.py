@@ -10,14 +10,20 @@ inputs are as follows
 @author Clarissa Seebohm and Audrey Pohl
 """
 
-def output_data (o1, odb, fileName):
+def output_data (fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
+
+    #mdb = openMdb(pathName)
     
+    odb = openOdb(pathName)
+    odbs = session.odbs[pathName] # don't know what the "odbs" is here... 
+
     # convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
-    session.viewports['Viewport: 1'].setValues(displayedObject=o1)
+    # I don't think o1 is necessary
+    session.viewports['Viewport: 1'].setValues(displayedObject=odbs)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
     # double check these to see what's necessary
