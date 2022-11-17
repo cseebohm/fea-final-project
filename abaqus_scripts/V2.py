@@ -21,16 +21,17 @@ fileName='X:/.win_desktop/PlateWithHole.csv'
 
 modelName='Model-1'
 partName='PlateWithHole'
+jobName="Job-1"
 
 #define part 
 seedSize = 0.005
 radius = 0.1125
 
 #make model
-make_model(modelName, partName, pathName,  radius, seedSize)
+make_model(modelName, partName, pathName, radius, seedSize)
 
 #submit job
-o1, odb = submit_job(modelName, )
+o1, odb = submit_job(modelName, jobName, pathName)
 
 #output data
 output_data(o1, odb, fileName)
