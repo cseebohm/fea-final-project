@@ -34,6 +34,6 @@ def submit_job(modelName, jobName, pathName):
     # path = '' specifies where the odb is that you want to open
     
     a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
-    odb = session.odbs['C:/temp/Job-1.odb'] # don't know what the "odbs" is here... 
+    odb = session.odbs[pathName] # don't know what the "odbs" is here... 
     
     return o1, odb
