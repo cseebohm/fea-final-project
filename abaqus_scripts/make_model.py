@@ -14,7 +14,14 @@ inputs are as follows
 @author Clarissa Seebohm and Audrey Pohl
 """
 
+# -*- coding: mbcs -*-
+# Do not delete the following import lines
+from abaqus import *
+from abaqusConstants import *
+import __main__
+
 def make_model (modelName, partName, pathName, radius, seedSize):
+    
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
