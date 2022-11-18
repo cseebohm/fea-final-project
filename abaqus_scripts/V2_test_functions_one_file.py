@@ -1,10 +1,9 @@
 """
-this script is for the convergence study for phase one (PA 4)
+this script is a test for the functions, it should run the exact same as V1.py
 
-@version 11-17-2022
+@version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
-import numpy as np
 
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
@@ -78,8 +77,6 @@ def make_model (modelName, partName, pathName, radius, seedSize):
         field='', magnitude=-1000000.0, amplitude=UNSET)
     
     #MESH PART    
-    p1 = m.parts[partName]
-    
     elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD, 
         secondOrderAccuracy=OFF, hourglassControl=DEFAULT, 
         distortionControl=DEFAULT)
@@ -95,6 +92,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     
     #SAVE
     mdb.saveAs(pathName)
+
 def submit_job(modelName, jobName, pathName):
 
     # open mdb object
@@ -119,18 +117,19 @@ def submit_job(modelName, jobName, pathName):
     #odb = session.openOdb(name='C:/temp/Job-1.odb') # this creates an odb object from the file at the dictated path
     # name = '' specifies the name of the repository key (idk what that means)
     # path = '' specifies where the odb is that you want to open
+    #o1 = session.openOdb(name='C:/temp/Job-1.odb')
+    #odb = session.odbs['C:/temp/Job-1.odb'] # don't know what the "odbs" is here... 
+    
+    #a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
+    return 
+
+def output_data (fileName, pathName):
+    import displayGroupMdbToolset as dgm
+    import displayGroupOdbToolset as dgo
+    
     o1 = session.openOdb(name='C:/temp/Job-1.odb')
     odb = session.odbs['C:/temp/Job-1.odb'] # don't know what the "odbs" is here... 
     
-    a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
-    return odb, o1
-def output_data (jobName, fileName):
-    import displayGroupMdbToolset as dgm
-    import displayGroupOdbToolset as dgo
-
-    o1 = session.openOdb(name='C:/temp/'+jobName+'.odb')
-    odb = session.odbs['C:/temp/'+jobName+'.odb'] # don't know what the "odbs" is here... 
-
     # convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
@@ -141,33 +140,28 @@ def output_data (jobName, fileName):
     # double check these to see what's necessary
     session.writeFieldReport(fileName, append=OFF, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
-        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 
-        'Max. In-Plane Principal (Abs)'), (
+        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
+        'Max. In-Plane Principal'), (INVARIANT, 
+        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
     
+#define paths and filenames
+pathName='X:/.win_desktop/cs-ap/data/V2'
+fileName='X:/.win_desktop/cs-ap/data/V2.csv'
+
+modelName='Model-1'
+partName='Plate-With-Hole'
+jobName='Job-1'
 
 #define part 
+seedSize = 0.005
 radius = 0.1125
-seedSize = .5
-modelName='Model-1'
 
-#define paths and filenames
-for i in range(3):
-    pathName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)
-    partName='Plate-With-Hole-'+ str(i)
+#make model
+make_model(modelName, partName, pathName, radius, seedSize)
 
-    #make model
-    make_model(modelName, partName, pathName,  radius, seedSize)
-
-    seedSize = seedSize/10
-   
-#submit jobs
-for i in range(3):
-    jobName = 'Job-'+str(i)
-    submit_job(modelName, jobName, pathName)
+#submit job
+submit_job(modelName, jobName, pathName)
 
 #output data
-for i in range(3):
-    fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
-    jobName = 'Job-'+str(i)
-    output_data(jobName, fileName)
+output_data(fileName, pathName)

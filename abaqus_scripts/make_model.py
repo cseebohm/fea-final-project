@@ -87,8 +87,6 @@ def make_model (modelName, partName, pathName, radius, seedSize):
         field='', magnitude=-1000000.0, amplitude=UNSET)
     
     #MESH PART    
-    p1 = m.parts[partName]
-    
     elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD, 
         secondOrderAccuracy=OFF, hourglassControl=DEFAULT, 
         distortionControl=DEFAULT)
