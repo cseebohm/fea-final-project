@@ -12,7 +12,6 @@ from abaqusConstants import *
 import __main__
 
 def make_model (modelName, partName, pathName, radius, seedSize):
-    
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
@@ -78,8 +77,6 @@ def make_model (modelName, partName, pathName, radius, seedSize):
         field='', magnitude=-1000000.0, amplitude=UNSET)
     
     #MESH PART    
-    p1 = m.parts[partName]
-    
     elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD, 
         secondOrderAccuracy=OFF, hourglassControl=DEFAULT, 
         distortionControl=DEFAULT)
@@ -95,6 +92,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     
     #SAVE
     mdb.saveAs(pathName)
+
 def submit_job(modelName, jobName, pathName):
 
     # open mdb object
@@ -124,6 +122,7 @@ def submit_job(modelName, jobName, pathName):
     
     a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
     return odb, o1
+
 def output_data (odb, o1, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
