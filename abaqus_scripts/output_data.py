@@ -34,3 +34,4 @@ def output_data (odb, o1, fileName, pathName):
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
     
+    

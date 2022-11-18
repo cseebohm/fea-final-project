@@ -93,6 +93,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     #SAVE
     mdb.saveAs(pathName)
 
+'''''
 def submit_job(modelName, jobName, pathName):
 
     # open mdb object
@@ -122,18 +123,39 @@ def submit_job(modelName, jobName, pathName):
     
     #a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
     return 
+'''''
 
-def output_data (fileName, pathName):
+def output_data (modelName, jobName, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
     
-    o1 = session.openOdb(name='C:/temp/Job-1.odb')
-    odb = session.odbs['C:/temp/Job-1.odb'] # don't know what the "odbs" is here... 
+    # open mdb object
+    mdb = openMdb(pathName)
+    m = mdb.models[modelName]
+    
+    #CREATE JOB
+    mdb.Job(name=jobName, model=modelName, description='', type=ANALYSIS, 
+        atTime=None, waitMinutes=0, waitHours=0, queue=None, memory=90, 
+        memoryUnits=PERCENTAGE, getMemoryFromAnalysis=True, 
+        explicitPrecision=SINGLE, nodalOutputPrecision=SINGLE, echoPrint=OFF, 
+        modelPrint=OFF, contactPrint=OFF, historyPrint=OFF, userSubroutine='', 
+        scratch='', resultsFormat=ODB, multiprocessingMode=DEFAULT, numCpus=1, 
+        numGPUs=0)
+    
+    #SUBMIT
+    mdb.jobs[jobName].submit(consistencyChecking=OFF)
+    
+    # Get ODB
+    session.mdbData.summary()
+    
+    ################
+    
+    o1 = session.openOdb(name='C:/temp/' + jobName + '.odb')
+    odb = session.odbs['C:/temp/' + jobName + '.odb'] # don't know what the "odbs" is here... 
     
     # convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
-    # I don't think o1 is necessary
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
@@ -144,6 +166,7 @@ def output_data (fileName, pathName):
         'Max. In-Plane Principal'), (INVARIANT, 
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
+    
     
 #define paths and filenames
 pathName='X:/.win_desktop/cs-ap/data/V2'
@@ -161,7 +184,7 @@ radius = 0.1125
 make_model(modelName, partName, pathName, radius, seedSize)
 
 #submit job
-submit_job(modelName, jobName, pathName)
+# submit_job(modelName, jobName, pathName)
 
 #output data
-output_data(fileName, pathName)
+output_data(modelName, jobName, fileName, pathName)
