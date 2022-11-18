@@ -1,10 +1,9 @@
 """
-this script is for the convergence study for phase one (PA 4)
+this script is a test for the functions, it should run the exact same as V1.py
 
-@version 11-17-2022
+@version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
-import numpy as np
 
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
@@ -13,6 +12,7 @@ from abaqusConstants import *
 import __main__
 
 def make_model (modelName, partName, pathName, radius, seedSize):
+    
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
@@ -147,32 +147,23 @@ def output_data (odb, o1, fileName, pathName):
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
     
+#define paths and filenames
+pathName='X:/.win_desktop/cs-ap/data/V2'
+fileName='X:/.win_desktop/cs-ap/data/V2.csv'
+
+modelName='Model-1'
+partName='Plate-With-Hole'
+jobName='Job-1'
 
 #define part 
+seedSize = 0.005
 radius = 0.1125
-seedSize = .5
-modelName='Model-1'
 
-#define paths and filenames
-for i in range(3):
-    pathName='X:/.win_desktop/P'+ str(i)
-    partName='Plate-With-Hole-'+ str(i)
+#make model
+make_model(modelName, partName, pathName, radius, seedSize)
 
-    #make model
-    make_model(modelName, partName, pathName,  radius, seedSize)
-
-    seedSize = seedSize/10
-   
-#make arrays
-o = np.zeros(3)
-odb = np.zeros(3)
-
-#submit jobs
-for j in range(3):
-    jobName = str(j)
-    o[j], odb[j] = submit_job(modelName, jobName, pathName)
+#submit job
+odb, o1 = submit_job(modelName, jobName, pathName)
 
 #output data
-for k in range(3):
-    fileName='X:/.win_desktop/P'+ str(k)+'.csv'
-    output_data(o[k], odb[k], fileName)
+output_data(odb, o1, fileName, pathName)

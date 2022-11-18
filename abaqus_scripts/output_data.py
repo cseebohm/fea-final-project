@@ -9,21 +9,21 @@ inputs are as follows
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
+# -*- coding: mbcs -*-
+# Do not delete the following import lines
+from abaqus import *
+from abaqusConstants import *
+import __main__
 
-def output_data (fileName, pathName):
+def output_data (odb, o1, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
-
-    #mdb = openMdb(pathName)
-    
-    odb = openOdb(pathName)
-    odbs = session.odbs[pathName] # don't know what the "odbs" is here... 
 
     # convert ODB to CSV for readable data
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
     # I don't think o1 is necessary
-    session.viewports['Viewport: 1'].setValues(displayedObject=odbs)
+    session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
     # double check these to see what's necessary
@@ -33,5 +33,4 @@ def output_data (fileName, pathName):
         'Max. In-Plane Principal'), (INVARIANT, 
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
-    
     

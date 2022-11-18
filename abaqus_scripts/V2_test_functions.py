@@ -15,13 +15,17 @@ from make_model import make_model
 from submit_job import submit_job
 from output_data import output_data
 
+#set working directory to cs-ap
+workingDir = 'X:/.win_desktop/cs-ap/abaqus_scripts'
+#workingDir = 'C:/temp/'
+
 #define paths and filenames
-pathName='X:/.win_desktop/PlateWithHole'
-fileName='X:/.win_desktop/PlateWithHole.csv'
+pathName='X:/.win_desktop/cs-ap/data/V2'
+fileName='X:/.win_desktop/cs-ap/data/V2.csv'
 
 modelName='Model-1'
-partName='PlateWithHole'
-jobName="Job-1"
+partName='Plate-With-Hole'
+jobName='Job-1'
 
 #define part 
 seedSize = 0.005
@@ -31,7 +35,7 @@ radius = 0.1125
 make_model(modelName, partName, pathName, radius, seedSize)
 
 #submit job
-submit_job(jobName, pathName)
+odb, o1 = submit_job(modelName, jobName, pathName, workingDir)
 
 #output data
-output_data(fileName)
+output_data(odb, o1, fileName, pathName)

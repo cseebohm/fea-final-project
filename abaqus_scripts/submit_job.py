@@ -10,11 +10,17 @@ inputs are as follows
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
+# -*- coding: mbcs -*-
+# Do not delete the following import lines
+from abaqus import *
+from abaqusConstants import *
+import __main__
 
-def submit_job(jobName, pathName):
-    
+def submit_job(modelName, jobName, pathName, workingDir):
+
     # open mdb object
     mdb = openMdb(pathName)
+    m = mdb.models[modelName]
     
     #CREATE JOB
     mdb.Job(name=jobName, model=modelName, description='', type=ANALYSIS, 
@@ -30,12 +36,11 @@ def submit_job(jobName, pathName):
     
     # Get ODB
     session.mdbData.summary()
-    odb = session.openOdb(path=pathName) # this creates an odb object from the file at the dictated path
+
+    o1 = session.openOdb(name=(workingDir+'Job-1.odb'))  # this creates an odb object from the file at the dictated path
     # name = '' specifies the name of the repository key (idk what that means)
     # path = '' specifies where the odb is that you want to open
+    odb = session.odbs[(workingDir+'Job-1.odb')] # don't know what the "odbs" is here... 
     
     a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
-
-    odb.saveAs(pathName)
-    
-    #return o1, odb # we might only need one of these. What's the difference between the two? 
+    return odb, o1
