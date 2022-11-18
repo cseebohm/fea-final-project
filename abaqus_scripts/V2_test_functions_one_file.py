@@ -93,38 +93,6 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     #SAVE
     mdb.saveAs(pathName)
 
-'''''
-def submit_job(modelName, jobName, pathName):
-
-    # open mdb object
-    mdb = openMdb(pathName)
-    m = mdb.models[modelName]
-    
-    #CREATE JOB
-    mdb.Job(name=jobName, model=modelName, description='', type=ANALYSIS, 
-        atTime=None, waitMinutes=0, waitHours=0, queue=None, memory=90, 
-        memoryUnits=PERCENTAGE, getMemoryFromAnalysis=True, 
-        explicitPrecision=SINGLE, nodalOutputPrecision=SINGLE, echoPrint=OFF, 
-        modelPrint=OFF, contactPrint=OFF, historyPrint=OFF, userSubroutine='', 
-        scratch='', resultsFormat=ODB, multiprocessingMode=DEFAULT, numCpus=1, 
-        numGPUs=0)
-    
-    #SUBMIT
-    mdb.jobs[jobName].submit(consistencyChecking=OFF)
-    
-    # Get ODB
-    session.mdbData.summary()
-
-    #odb = session.openOdb(name='C:/temp/Job-1.odb') # this creates an odb object from the file at the dictated path
-    # name = '' specifies the name of the repository key (idk what that means)
-    # path = '' specifies where the odb is that you want to open
-    #o1 = session.openOdb(name='C:/temp/Job-1.odb')
-    #odb = session.odbs['C:/temp/Job-1.odb'] # don't know what the "odbs" is here... 
-    
-    #a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
-    return 
-'''''
-
 def output_data (modelName, jobName, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
@@ -182,9 +150,6 @@ radius = 0.1125
 
 #make model
 make_model(modelName, partName, pathName, radius, seedSize)
-
-#submit job
-# submit_job(modelName, jobName, pathName)
 
 #output data
 output_data(modelName, jobName, fileName, pathName)
