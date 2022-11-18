@@ -123,7 +123,7 @@ def output_data (modelName, jobName, fileName, pathName):
     ################
     
     o1 = session.openOdb(name='C:/temp/' + jobName + '.odb')
-    odb = session.odbs['C:/temp/' + jobName + '.odb'] # don't know what the "odbs" is here... 
+    odb = session.odbs['C:/temp/' + jobName + '.odb'] 
     
     # CONVERT ODB TO CSV
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
@@ -137,9 +137,11 @@ def output_data (modelName, jobName, fileName, pathName):
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
         stepFrame=SPECIFY)
 
+    odb.close()
+
 #define part 
 radius = 0.1125
-seedSize = np.linspace(.0001, .5, 10)
+seedSizeArray = np.linspace(.001, .5, 10)
 
 #define paths and filenames
 for i in range(10):
@@ -148,7 +150,7 @@ for i in range(10):
     modelName='Model-'+str(i)
 
     #update seedSize
-    seedSize = seedSize[i]
+    seedSize = seedSizeArray[i]
 
     #make model
     make_model(modelName, partName, pathName,  radius, seedSize)
