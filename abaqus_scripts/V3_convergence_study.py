@@ -95,6 +95,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     
     #SAVE
     mdb.saveAs(pathName)
+    
 def output_data (modelName, jobName, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
