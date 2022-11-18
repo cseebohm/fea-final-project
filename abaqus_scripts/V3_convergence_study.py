@@ -17,6 +17,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     import mesh
     import displayGroupOdbToolset as dgo
 
+    mdb.Model(name=modelName, modelType=STANDARD_EXPLICIT)
     m = mdb.models[modelName]
     
     #GEOMETRY
@@ -145,6 +146,7 @@ modelName='Model-1'
 for i in range(3):
     pathName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)
     partName='Plate-With-Hole-'+ str(i)
+    modelName='Model-'+str(i)
 
     #make model
     make_model(modelName, partName, pathName,  radius, seedSize)
@@ -156,4 +158,5 @@ for i in range(3):
 for i in range(3):
     fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
+    modelName='Model-'+str(i)
     output_data (modelName, jobName, fileName, pathName)
