@@ -97,7 +97,7 @@ def output_data (modelName, jobName, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
     
-    # open mdb object
+    # OPEN MDB PROJECT
     mdb = openMdb(pathName)
     m = mdb.models[modelName]
     
@@ -121,13 +121,12 @@ def output_data (modelName, jobName, fileName, pathName):
     o1 = session.openOdb(name='C:/temp/' + jobName + '.odb')
     odb = session.odbs['C:/temp/' + jobName + '.odb'] # don't know what the "odbs" is here... 
     
-    # convert ODB to CSV for readable data
+    # CONVERT ODB TO CSV
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
-    # double check these to see what's necessary
     session.writeFieldReport(fileName, append=OFF, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
         variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
