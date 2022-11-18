@@ -95,9 +95,11 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     
     #SAVE
     mdb.saveAs(pathName)
-def submit_job(modelName, jobName, pathName):
-
-    # open mdb object
+def output_data (modelName, jobName, fileName, pathName):
+    import displayGroupMdbToolset as dgm
+    import displayGroupOdbToolset as dgo
+    
+    # OPEN MDB PROJECT
     mdb = openMdb(pathName)
     m = mdb.models[modelName]
     
@@ -115,36 +117,24 @@ def submit_job(modelName, jobName, pathName):
     
     # Get ODB
     session.mdbData.summary()
-
-    #odb = session.openOdb(name='C:/temp/Job-1.odb') # this creates an odb object from the file at the dictated path
-    # name = '' specifies the name of the repository key (idk what that means)
-    # path = '' specifies where the odb is that you want to open
-    o1 = session.openOdb(name='C:/temp/Job-1.odb')
-    odb = session.odbs['C:/temp/Job-1.odb'] # don't know what the "odbs" is here... 
     
-    a = m.rootAssembly # not sure if this line is nessecary either bc we don't use a
-    return odb, o1
-def output_data (jobName, fileName):
-    import displayGroupMdbToolset as dgm
-    import displayGroupOdbToolset as dgo
-
-    o1 = session.openOdb(name='C:/temp/'+jobName+'.odb')
-    odb = session.odbs['C:/temp/'+jobName+'.odb'] # don't know what the "odbs" is here... 
-
-    # convert ODB to CSV for readable data
+    ################
+    
+    o1 = session.openOdb(name='C:/temp/' + jobName + '.odb')
+    odb = session.odbs['C:/temp/' + jobName + '.odb'] # don't know what the "odbs" is here... 
+    
+    # CONVERT ODB TO CSV
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
-    # I don't think o1 is necessary
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
-    # double check these to see what's necessary
     session.writeFieldReport(fileName, append=OFF, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
-        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 
-        'Max. In-Plane Principal (Abs)'), (
+        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
+        'Max. In-Plane Principal'), (INVARIANT, 
+        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
         INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
-    
 
 #define part 
 radius = 0.1125
@@ -160,14 +150,9 @@ for i in range(3):
     make_model(modelName, partName, pathName,  radius, seedSize)
 
     seedSize = seedSize/10
-   
-#submit jobs
-for i in range(3):
-    jobName = 'Job-'+str(i)
-    submit_job(modelName, jobName, pathName)
 
 #output data
 for i in range(3):
     fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
-    output_data(jobName, fileName)
+    output_data (modelName, jobName, fileName, pathName)
