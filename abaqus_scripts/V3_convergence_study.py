@@ -149,6 +149,7 @@ for i in range(3):
     #make model
     make_model(modelName, partName, pathName,  radius, seedSize)
 
+    #update seedSize
     seedSize = seedSize/10
 
 #output data
