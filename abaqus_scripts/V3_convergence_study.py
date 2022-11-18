@@ -96,7 +96,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     
     #SAVE
     mdb.saveAs(pathName)
-    
+
 def output_data (modelName, jobName, fileName, pathName):
     import displayGroupMdbToolset as dgm
     import displayGroupOdbToolset as dgo
@@ -139,24 +139,23 @@ def output_data (modelName, jobName, fileName, pathName):
 
 #define part 
 radius = 0.1125
-seedSize = .5
-modelName='Model-1'
+seedSize = np.linspace(.0001, .5, 10)
 
 #define paths and filenames
-for i in range(3):
-    pathName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)
+for i in range(10):
+    pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
     partName='P-'+ str(i)
     modelName='Model-'+str(i)
+
+    #update seedSize
+    seedSize = seedSize[i]
 
     #make model
     make_model(modelName, partName, pathName,  radius, seedSize)
 
-    #update seedSize
-    seedSize = seedSize/10
-
 #output data
-for i in range(3):
-    pathName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)
+for i in range(10):
+    pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
     fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
