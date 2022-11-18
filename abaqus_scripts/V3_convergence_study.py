@@ -145,7 +145,7 @@ modelName='Model-1'
 #define paths and filenames
 for i in range(3):
     pathName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)
-    partName='Plate-With-Hole-'+ str(i)
+    partName='P-'+ str(i)
     modelName='Model-'+str(i)
 
     #make model
@@ -156,7 +156,9 @@ for i in range(3):
 
 #output data
 for i in range(3):
+    pathName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)
     fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
+
     output_data (modelName, jobName, fileName, pathName)
