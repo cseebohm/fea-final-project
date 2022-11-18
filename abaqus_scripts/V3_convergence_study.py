@@ -133,9 +133,8 @@ def output_data (modelName, jobName, fileName, pathName):
     session.writeFieldReport(fileName, append=OFF, 
         sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
         variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
-        'Max. In-Plane Principal'), (INVARIANT, 
-        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
-        INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
+        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
+        stepFrame=SPECIFY)
 
 #define part 
 radius = 0.1125
