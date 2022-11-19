@@ -48,8 +48,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     region = p.Set(faces=faces, name='Set-1')
     
     p.SectionAssignment(region=region, sectionName='PlateSection', offset=0.0, 
-        offsetType=MIDDLE_SURFACE, offsetField='', 
-        thicknessAssignment=FROM_SECTION)
+        offsetType=MIDDLE_SURFACE, offsetField='', thicknessAssignment=FROM_SECTION)
     
     a = m.rootAssembly
     
