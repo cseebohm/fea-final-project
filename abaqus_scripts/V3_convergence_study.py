@@ -119,8 +119,6 @@ def output_data (modelName, jobName, fileName, pathName):
     # Get ODB
     session.mdbData.summary()
     
-    ################
-    
     o1 = session.openOdb(name='C:/temp/' + jobName + '.odb')
     odb = session.odbs['C:/temp/' + jobName + '.odb'] 
     
@@ -161,4 +159,4 @@ for i in range(10):
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
 
-    output_data (modelName, jobName, fileName, pathName)
+    output_data(modelName, jobName, fileName, pathName)
