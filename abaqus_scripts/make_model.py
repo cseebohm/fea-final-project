@@ -5,8 +5,7 @@ inputs are as follows
     - what you want the model to be called as a string 'My-Model' 
     - name of your part relative to the model each model will generate a new part 'My-Part'
     - path name of where you want your model to be saved as a string 'C:/Desktop'
-    - radius of the circle as a float type 4.2
-    - seed size as a float type 0.005
+    - radius of the circle as a list or numpy array of float types [4.2, 4.0, 3.8, ...]
     
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl

@@ -2,9 +2,10 @@
 this script defines a function to output data as a csv from an odb, it does not loop
 
 inputs are as follows 
-    - o1 is your odb object generated in submit_job
-    - odb is your... idk what's different about this than the o1
+    - modelName is what you want the model to be called as a string 'My-Model'
+    - jobName is what you want your jobs to be called as a string 'My-Job'
     - fileName is what you'll name your .csv file as a string 'My-csv'
+    - pathName is where you want your .csv files to be saved 'X:/Desktop'
 
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
@@ -14,27 +15,6 @@ inputs are as follows
 from abaqus import *
 from abaqusConstants import *
 import __main__
-
-def output_data (odb, o1, fileName, pathName):
-    import displayGroupMdbToolset as dgm
-    import displayGroupOdbToolset as dgo
-
-    # convert ODB to CSV for readable data
-    session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
-    
-    # I don't think o1 is necessary
-    session.viewports['Viewport: 1'].setValues(displayedObject=o1)
-    session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
-    
-    # double check these to see what's necessary
-    session.writeFieldReport(fileName, append=OFF, 
-        sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
-        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
-        'Max. In-Plane Principal'), (INVARIANT, 
-        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal'), (
-        INVARIANT, 'Max. Principal (Abs)'), )), ), stepFrame=SPECIFY)
-    
-########### 
 
 def output_data (modelName, jobName, fileName, pathName):
     import displayGroupMdbToolset as dgm
@@ -68,10 +48,9 @@ def output_data (modelName, jobName, fileName, pathName):
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
-    session.writeFieldReport(fileName, append=OFF, 
-        sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
-        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
-        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
+    session.writeFieldReport(fileName, append=OFF, sortItem='Node Label', odb=odb, step=0, 
+        frame=1, outputPosition=NODAL, variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), 
+        (INVARIANT, 'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
         stepFrame=SPECIFY)
 
     odb.close()
