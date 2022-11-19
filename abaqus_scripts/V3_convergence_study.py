@@ -4,13 +4,13 @@ this script is for the convergence study for phase one (PA 4)
 @version 11-17-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
-import numpy as np
 
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
 from abaqus import *
 from abaqusConstants import *
 import __main__
+import numpy as np
 
 def make_model (modelName, partName, pathName, radius, seedSize):
     import displayGroupMdbToolset as dgm

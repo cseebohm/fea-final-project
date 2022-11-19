@@ -10,6 +10,7 @@ inputs are as follows
 @version 11-15-2022
 @author Clarissa Seebohm and Audrey Pohl
 """
+
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
 from abaqus import *

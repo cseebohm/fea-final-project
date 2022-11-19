@@ -5,13 +5,12 @@ this script is to generate training data for phase one: varying the radius of a 
 @author Clarissa Seebohm and Audrey Pohl
 """
 
-import numpy as np
-
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
 from abaqus import *
 from abaqusConstants import *
 import __main__
+import numpy as np
 
 def make_model(modelName, partName, pathName, radius):
     import displayGroupMdbToolset as dgm
