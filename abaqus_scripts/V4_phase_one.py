@@ -134,7 +134,7 @@ def output_data (modelName, jobName, fileName, pathName):
 
     odb.close()
 
-radiusArray = np.linspace(0, 0.2, 10) # going to increase this later but 10 as a placeholder
+radiusArray = np.linspace(0, 0.199, 10) # 10 as a placeholder
 
 # GENERATE 10 MODELS WITH VARYING RADII
 for i in range(10):

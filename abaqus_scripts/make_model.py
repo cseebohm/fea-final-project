@@ -4,8 +4,6 @@ this script defines a function to make a model, it does not loop
 inputs are as follows
     - what you want the model to be called as a string 'My-Model' 
     - name of your part relative to the model each model will generate a new part 'My-Part'
-    # not sure about this ^^ I believe the part name will stay constant and just the model will get renamed? 
-    # since the part names are relative to and within the model
     - path name of where you want your model to be saved as a string 'C:/Desktop'
     - radius of the circle as a float type 4.2
     - seed size as a float type 0.005
@@ -19,13 +17,13 @@ inputs are as follows
 from abaqus import *
 from abaqusConstants import *
 import __main__
-
-def make_model (modelName, partName, pathName, radius, seedSize):
     
+def make_model(modelName, partName, pathName, radius):
     import displayGroupMdbToolset as dgm
     import mesh
     import displayGroupOdbToolset as dgo
 
+    mdb.Model(name=modelName, modelType=STANDARD_EXPLICIT)
     m = mdb.models[modelName]
     
     #GEOMETRY
@@ -37,8 +35,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     s.CircleByCenterPerimeter(center=(0.1, 0.1), point1=(0.1, radius))
     
     #MAKE PART
-    p = m.Part(name=partName, 
-        dimensionality=TWO_D_PLANAR, type=DEFORMABLE_BODY)
+    p = m.Part(name=partName, dimensionality=TWO_D_PLANAR, type=DEFORMABLE_BODY)
     
     p.BaseShell(sketch=s)
     s.unsetPrimaryObject()
@@ -56,8 +53,7 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     region = p.Set(faces=faces, name='Set-1')
     
     p.SectionAssignment(region=region, sectionName='PlateSection', offset=0.0, 
-        offsetType=MIDDLE_SURFACE, offsetField='', 
-        thicknessAssignment=FROM_SECTION)
+        offsetType=MIDDLE_SURFACE, offsetField='', thicknessAssignment=FROM_SECTION)
     
     a = m.rootAssembly
     
@@ -82,21 +78,22 @@ def make_model (modelName, partName, pathName, radius, seedSize):
     
     region = a.Surface(side1Edges=side1Edges1, name='Surf-1')
     
-    m.Pressure(name='PressureRightEdge', 
-        createStepName='Step-1', region=region, distributionType=UNIFORM, 
-        field='', magnitude=-1000000.0, amplitude=UNSET)
+    m.Pressure(name='PressureRightEdge', createStepName='Step-1', region=region, 
+        distributionType=UNIFORM, field='', magnitude=-1000000.0, amplitude=UNSET)
     
     #MESH PART    
-    elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD, 
-        secondOrderAccuracy=OFF, hourglassControl=DEFAULT, 
-        distortionControl=DEFAULT)
+    p1 = m.parts[partName]
+    
+    elemType1 = mesh.ElemType(elemCode=CPS4R, elemLibrary=STANDARD, secondOrderAccuracy=OFF, 
+        hourglassControl=DEFAULT, distortionControl=DEFAULT)
+    
     elemType2 = mesh.ElemType(elemCode=CPS3, elemLibrary=STANDARD)
 
     faces = f.getSequenceFromMask(mask=('[#1 ]', ), )
-    pickedRegions =(faces, )
+    pickedRegions = (faces, )
     p.setElementType(regions=pickedRegions, elemTypes=(elemType1, elemType2))
 
-    p.seedPart(size=seedSize, deviationFactor=0.1, minSizeFactor=0.1) # do we need seedSize to be an input here? 
+    p.seedPart(size= 0.005, deviationFactor=0.1, minSizeFactor=0.1) # do we need seedSize to be an input here? 
     p.generateMesh()
     a.regenerate()
     
