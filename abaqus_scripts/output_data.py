@@ -4,7 +4,7 @@ this script defines a function to output data as a csv from an odb, it does not 
 inputs are as follows 
     - modelName is what you want the model to be called as a string 'My-Model'
     - jobName is what you want your jobs to be called as a string 'My-Job'
-    - fileName is what you'll name your .csv file as a string 'My-csv'
+    - fileName is the path and file name of your .csv file as a string 'X:/Desktop/My-csv.csv'
     - pathName is where you want your .csv files to be saved 'X:/Desktop'
 
 @version 11-15-2022
