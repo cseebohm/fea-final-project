@@ -102,7 +102,6 @@ def output_data (modelName, jobName, fileName, pathName):
     
     # OPEN MDB PROJECT
     mdb = openMdb(pathName)
-    m = mdb.models[modelName]
     
     #CREATE JOB
     mdb.Job(name=jobName, model=modelName, description='', type=ANALYSIS, 
@@ -114,7 +113,7 @@ def output_data (modelName, jobName, fileName, pathName):
         numGPUs=0)
     
     #SUBMIT
-    mdb.jobs[jobName].submit(consistencyChecking=OFF)
+    mdb.jobs[jobName].submit(consistencyChecking=ON)
     
     # Get ODB
     session.mdbData.summary()
@@ -134,13 +133,14 @@ def output_data (modelName, jobName, fileName, pathName):
         'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
         stepFrame=SPECIFY)
 
-    odb.close()
+    #odb.close()
 
 # DEFINE PART 
 radius = 0.1125
 seedSizeArray = np.linspace(.001, .5, 10)
 
 # GENERATE 10 MODELS WITH VARYING SEED SIZE
+"""
 for i in range(10):
     pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
     partName='P-'+ str(i)
@@ -149,7 +149,7 @@ for i in range(10):
     seedSize = seedSizeArray[i]
 
     make_model(modelName, partName, pathName,  radius, seedSize)
-
+"""
 # CONVERT FROM ODB TO CSV AND OUTPUT CSV
 for i in range(10):
     pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
