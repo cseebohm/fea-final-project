@@ -35,23 +35,26 @@ def output_data (modelName, jobName, fileName, pathName):
         numGPUs=0)
     
     #SUBMIT
-    mdb.jobs[jobName].submit(consistencyChecking=OFF)
+    mdb.jobs[jobName].submit(consistencyChecking=ON)
     
-    # Get ODB
-    session.mdbData.summary()
+    #WAIT FOR COMPLETION
+    mdb.jobs[jobName].waitForCompletion()
     
+    #GET ODB
+    session.mdbData.summary() 
     o1 = session.openOdb(name='C:/temp/' + jobName + '.odb')
     odb = session.odbs['C:/temp/' + jobName + '.odb'] 
     
-    # CONVERT ODB TO CSV
+    #CONVERT ODB TO CSV
     session.fieldReportOptions.setValues(reportFormat=COMMA_SEPARATED_VALUES)
     
     session.viewports['Viewport: 1'].setValues(displayedObject=o1)
     session.viewports['Viewport: 1'].odbDisplay.setFrame(step=0, frame=1)
     
-    session.writeFieldReport(fileName, append=OFF, sortItem='Node Label', odb=odb, step=0, 
-        frame=1, outputPosition=NODAL, variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), 
-        (INVARIANT, 'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
+    session.writeFieldReport(fileName, append=OFF, 
+        sortItem='Node Label', odb=odb, step=0, frame=1, outputPosition=NODAL, 
+        variable=(('S', INTEGRATION_POINT, ((INVARIANT, 'Mises'), (INVARIANT, 
+        'Max. In-Plane Principal (Abs)'), (INVARIANT, 'Max. Principal (Abs)'), )), ), 
         stepFrame=SPECIFY)
 
     odb.close()
