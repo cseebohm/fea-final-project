@@ -138,7 +138,7 @@ def output_data (modelName, jobName, fileName, pathName):
 
 # DEFINE PART 
 radius = 0.1125
-seedSizeArray = np.linspace(.0005, .25, 5)
+seedSizeArray = np.linspace(.0005, .25, 10)
 
 # GENERATE 10 MODELS WITH VARYING SEED SIZE
 for i in range(10):
