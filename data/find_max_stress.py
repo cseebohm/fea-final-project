@@ -41,8 +41,8 @@ for i in range(10):
 #plot
 plt.plot(seedSizeArray, maxStressArray, marker = 'o', label = 'Quad-dominated')
 
-plt.xlabel("Element Seed Size [units?]")
-plt.ylabel("Max Stress [units?]")
+plt.xlabel("Element Seed Size")
+plt.ylabel("Max Stress [Pa]")
 plt.legend()
 plt.title("Approximate Global Seed Size vs Max Stress")
 
