@@ -138,11 +138,11 @@ def output_data (modelName, jobName, fileName, pathName):
 
 # DEFINE PART 
 radius = 0.1125
-seedSizeArray = np.linspace(.001, .5, 10)
+seedSizeArray = np.linspace(.0005, .25, 5)
 
 # GENERATE 10 MODELS WITH VARYING SEED SIZE
 for i in range(10):
-    pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
+    pathName='X:/.win_desktop/deleteme/C2_p'+ str(i)
     partName='P-'+ str(i)
     modelName='Model-'+str(i)
 
@@ -152,8 +152,8 @@ for i in range(10):
 
 # CONVERT FROM ODB TO CSV AND OUTPUT CSV
 for i in range(10):
-    pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
-    fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
+    pathName='X:/.win_desktop/deleteme/C2_p'+ str(i)
+    fileName='X:/.win_desktop/cs-ap/data/convergDataC2_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
 
