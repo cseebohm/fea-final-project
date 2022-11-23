@@ -22,7 +22,7 @@ def find_max(file):
 
     #read csv using pandas
         #data has type DataFrame
-    data = pd.read_csv(dir + "/data/convergData/convergData" + file)
+    data = pd.read_csv(dir + "/data/convergData/" + file)
 
     #find max stress of specified column
     maxStress = data['S-Max. In-Plane Principal (Abs)'].max()
@@ -30,20 +30,18 @@ def find_max(file):
     return maxStress
 
 """ Main """
-seedSizeArrayInitial = np.linspace(.0005, .25, 10)
-print(seedSizeArrayInitial)
+seedSizeArrayInitial = np.linspace(.0005, .01, 10)
 
-#only jobs 1-6 completed, removing jobs 0 and 8,9
-    # seedSizeArray should be [0.02822222 0.05594444 0.08366667 0.11138889 0.13911111 0.16683333]
-seedSizeArray = seedSizeArrayInitial[1:7]
+#only jobs 1-9 completed, removing jobs 0 and 8,9
+
+seedSizeArray = seedSizeArrayInitial[1:10]
 print(seedSizeArray)
-maxStressArray = np.zeros(6)
+maxStressArray = np.zeros(9)
 
 #find max for each file
-for i in range(6):
-    file = "C2_p" + str(i+1) + ".csv"
+for i in range(9):
+    file = "C2a_p" + str(i+1) + ".csv"
     maxStressArray[i] = find_max(file)
-
 
 #plot
 plt.plot(seedSizeArray, maxStressArray, marker = 'o', label = 'Quad-dominated')
