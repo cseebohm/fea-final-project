@@ -7,10 +7,12 @@ this script is to generate training data for phase one: varying the radius of a 
 
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
+from pathlib import Path
 from abaqus import *
 from abaqusConstants import *
 import __main__
 import numpy as np
+import pandas as pd
 
 def make_model(modelName, partName, pathName, radius):
     import displayGroupMdbToolset as dgm
@@ -133,22 +135,29 @@ def output_data (modelName, jobName, fileName, pathName):
 
     odb.close()
 
-radiusArray = np.linspace(0, 0.199, 10) # 10 as a placeholder
+num = 10
+radiusArray = np.zeros(num)
+radius_name = 'P1_radius'
+folder_path = 'X:/.win_desktop/cs-ap/data/training_data/phase_one_a/'
 
-# GENERATE 10 MODELS WITH VARYING RADII
-for i in range(10):
-    pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
+# GENERATE MODELS WITH VARYING RADII
+for i in range(num):
+    pathName='X:/.win_desktop/deleteme/V4_p'+ str(i)
     partName='P-'+ str(i)
     modelName='Model-'+str(i)
 
-    radius = radiusArray[i]
+    radiusArray[i] = random number between 1mm and 12mm 
 
-    make_model(modelName, partName, pathName, radius)
+    make_model(modelName, partName, pathName, radiusArray[i])
+
+# SAVE RADIUS ARRAY TO CSV
+radius_df = pd.DataFrame(radiusArray)
+radius_df.to_csv(folder_path + radius_name '.csv')
 
 # CONVERT FROM ODB TO CSV AND OUTPUT CSV
-for i in range(10):
-    pathName='X:/.win_desktop/deleteme/V2_p'+ str(i)
-    fileName='X:/.win_desktop/cs-ap/data/V2_p'+ str(i)+'.csv'
+for i in range(num):
+    pathName='X:/.win_desktop/deleteme/V4_p'+ str(i)
+    fileName= folder_path + 'P4_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
 
