@@ -18,7 +18,7 @@ from get_radius import get_radius
 
 "DEFINITIONS: CHECK EVERYTIME"
 #file name initial
-data_path = "/data/training_data/phase_one_a/"
+data_path = "/Users/audreypohl/Documents/FEA/cs-ap/data/training_data/phase_one_a/radius_file"
 
 file_string = "P"
 radius_file = "radius_file"
@@ -48,3 +48,6 @@ elif(np.size(radiusArray) != num or np.size(maxStressArray) != num):
 
 "OUTPUT CLEAN DATA"
 #put labels
+output_dict = {'Radius': radiusArray, 'Max Stress': maxStressArray}
+output = pd.DataFrame(output_dict)
+print(output)
