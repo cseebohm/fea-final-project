@@ -148,6 +148,8 @@ jobName='Job-1'
 seedSize = 0.005
 radius = 0.1125
 
+print(type(radius))
+
 #make model
 make_model(modelName, partName, pathName, radius, seedSize)
 
