@@ -20,8 +20,8 @@ from get_radius import get_radius
 #file name initial
 data_path = "/data/training_data/phase_one_a/"
 
-file_string = "P1_"
-radius_file = "P1_radius"
+file_string = "P"
+radius_file = "radius_file"
 
 #number of data points
 num = 10
