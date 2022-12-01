@@ -18,7 +18,7 @@ from get_radius import get_radius
 
 "DEFINITIONS: CHECK EVERYTIME"
 #file name initial
-data_path = "/Users/audreypohl/Documents/FEA/cs-ap/data/training_data/phase_one_a/radius_file"
+data_path = "/data/training_data/"
 
 file_string = "P"
 radius_file = "radius_file"
@@ -38,16 +38,8 @@ for i in range(num):
     fileName = file_string + str(i) + ".csv"
     maxStressArray[i] = find_max(data_path, fileName)
 
-"ERROR CHECKS"
-#checks to see all values were populated
-if(np.all(radiusArray) == 0 or np.all(maxStressArray)):
-    print("Error: zero element exists in array")
-
-elif(np.size(radiusArray) != num or np.size(maxStressArray) != num):
-    print("Error: array size not equal to element number")
-
 "OUTPUT CLEAN DATA"
-#put labels
-output_dict = {'Radius': radiusArray, 'Max Stress': maxStressArray}
+# put radius and max stress into a dict to turn it into a df, then csv file
+output_dict = {'Radius': radiusArray, 'MaxStress': maxStressArray}
 output = pd.DataFrame(output_dict)
-print(output)
+output.to_csv('training_data.csv')

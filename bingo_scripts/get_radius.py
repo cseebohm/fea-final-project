@@ -9,6 +9,7 @@ inputs are as follows
 """
 import pandas as pd
 import os
+import csv
 
 def get_radius(file):
     
@@ -16,7 +17,9 @@ def get_radius(file):
     dir = os.getcwd()
 
     #read csv using pandas so that data has type DataFrame
-    radius_df = pd.read_csv(dir + "/data/training_data/phase_one_a/" + file)
-    radiusArray = radius_df.to_numpy
-
+    with open((dir + "/data/training_data/" + file + ".csv"), 'r') as radius_csv:
+        radiusArray = []
+        for radius in radius_csv:
+            radiusArray.append(radius.replace("\n", ""))
+            
     return radiusArray

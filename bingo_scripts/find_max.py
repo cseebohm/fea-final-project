@@ -20,6 +20,6 @@ def find_max(data_path, file_string):
     data = pd.read_csv(dir + data_path + file_string)
 
     #find max stress of specified column
-    maxStress = data['S-Mises'].max()
+    maxStress = data['       S-Mises'].max()
 
     return maxStress
