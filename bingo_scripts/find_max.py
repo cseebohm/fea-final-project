@@ -15,11 +15,10 @@ def find_max(data_path, file_string):
     #set directory to current working directory
     dir = os.getcwd()
 
-    #read csv using pandas
-        #data has type DataFrame
+    #read csv using pandas so that data has type DataFrame
     data = pd.read_csv(dir + data_path + file_string)
 
     #find max stress of specified column
-    maxStress = data['S-Max. In-Plane Principal (Abs)'].max()
+    maxStress = data['S-Mises'].max()
 
     return maxStress
