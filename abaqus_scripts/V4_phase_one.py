@@ -7,12 +7,10 @@ this script is to generate training data for phase one: varying the radius of a 
 
 # -*- coding: mbcs -*-
 # Do not delete the following import lines
-from pathlib import Path
 from abaqus import *
 from abaqusConstants import *
 import __main__
 import numpy as np
-import pandas as pd
 
 def make_model(modelName, partName, pathName, radius):
     import displayGroupMdbToolset as dgm
@@ -27,8 +25,10 @@ def make_model(modelName, partName, pathName, radius):
     g, v, d, c = s.geometry, s.vertices, s.dimensions, s.constraints
     s.setPrimaryObject(option=STANDALONE)
      
-    s.rectangle(point1=(0.0, 0.0), point2=(0.2, 0.2))
-    s.CircleByCenterPerimeter(center=(0.1, 0.1), point1=(0.1, radius))
+   #s.rectangle(point1=(0.0, 0.0), point2=(0.2, 0.2))
+    s.rectangle(point1=(0.0, 0.0), point2=(200.0, 200.0))
+    #s.CircleByCenterPerimeter(center=(0.1, 0.1), point1=(0.1, radius))
+    s.CircleByCenterPerimeter(center=(100.0, 100.0), point1=(100.0, radius))
     
     #MAKE PART
     p = m.Part(name=partName, dimensionality=TWO_D_PLANAR, type=DEFORMABLE_BODY)
@@ -40,8 +40,9 @@ def make_model(modelName, partName, pathName, radius):
     
     #MAKE MATERIAL
     m.Material(name='Steel')
-    m.materials['Steel'].Elastic(table=((200000000000.0, 0.32), ))
-    m.HomogeneousSolidSection(name='PlateSection', material='Steel', thickness=0.001)
+    m.materials['Steel'].Elastic(table=((200000.0, 0.32), ))
+    #m.materials['Steel'].Elastic(table=((200000000000.0, 0.32), ))
+    m.HomogeneousSolidSection(name='PlateSection', material='Steel', thickness=1.0)
 
     #SECTION ASSIGNMENT
     f = p.faces
@@ -89,7 +90,7 @@ def make_model(modelName, partName, pathName, radius):
     pickedRegions = (faces, )
     p.setElementType(regions=pickedRegions, elemTypes=(elemType1, elemType2))
 
-    p.seedPart(size= XX, deviationFactor=0.1, minSizeFactor=0.1) # do we need seedSize to be an input here? 
+    p.seedPart(size=5, deviationFactor=0.1, minSizeFactor=0.1) # do we need seedSize to be an input here? 
     p.generateMesh()
     a.regenerate()
     
@@ -114,7 +115,9 @@ def output_data (modelName, jobName, fileName, pathName):
         numGPUs=0)
     
     #SUBMIT
-    mdb.jobs[jobName].submit(consistencyChecking=OFF)
+    mdb.jobs[jobName].submit(consistencyChecking=ON)
+
+    mdb.jobs[jobName].waitForCompletion()
     
     # Get ODB
     session.mdbData.summary()
@@ -136,7 +139,11 @@ def output_data (modelName, jobName, fileName, pathName):
     odb.close()
 
 num = 10
-radiusArray = np.zeros(num)
+radiusArray = np.random.randint(1,99,num)
+radiusArray.astype(float)
+#radiusArray = radiusArray/1000
+print(radiusArray)
+
 radius_name = 'P1_radius'
 folder_path = 'X:/.win_desktop/cs-ap/data/training_data/phase_one_a/'
 
@@ -146,13 +153,13 @@ for i in range(num):
     partName='P-'+ str(i)
     modelName='Model-'+str(i)
 
-    radiusArray[i] = random number between 1mm and 12mm 
+    currentRadius = float(radiusArray[i])
+    radiusPoint = 100 + currentRadius
 
-    make_model(modelName, partName, pathName, radiusArray[i])
+    make_model(modelName, partName, pathName, radiusPoint)
 
 # SAVE RADIUS ARRAY TO CSV
-radius_df = pd.DataFrame(radiusArray)
-radius_df.to_csv(folder_path + radius_name '.csv')
+np.savetxt((radius_name + '.csv'), radiusArray,delimiter=',')
 
 # CONVERT FROM ODB TO CSV AND OUTPUT CSV
 for i in range(num):
