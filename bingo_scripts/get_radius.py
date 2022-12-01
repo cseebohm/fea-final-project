@@ -11,12 +11,11 @@ import pandas as pd
 import os
 
 def get_radius(file):
-
+    
     #set directory to current working directory
     dir = os.getcwd()
 
-    #read csv using pandas
-        #data has type DataFrame
+    #read csv using pandas so that data has type DataFrame
     radius_df = pd.read_csv(dir + "/data/training_data/phase_one_a/" + file)
     radiusArray = radius_df.to_numpy
 
