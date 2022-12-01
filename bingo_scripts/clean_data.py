@@ -47,3 +47,4 @@ elif(np.size(radiusArray) != num or np.size(maxStressArray) != num):
     print("Error: array size not equal to element number")
 
 "OUTPUT CLEAN DATA"
+#put labels
