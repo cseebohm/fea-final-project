@@ -20,7 +20,7 @@ from get_radius import get_radius
 #file name initial
 data_path = "/data/validation_data/"
 
-file_string = "V"
+file_string = "V1_p"
 radius_file = "V1_radius"
 
 #number of data points

@@ -17,7 +17,7 @@ def get_radius(file):
     dir = os.getcwd()
 
     #read csv using pandas so that data has type DataFrame
-    with open((dir + "/data/training_data/" + file + ".csv"), 'r') as radius_csv:
+    with open((dir + "/data/validation_data/" + file + ".csv"), 'r') as radius_csv:
         radiusArray = []
         for radius in radius_csv:
             radiusArray.append(radius.replace("\n", ""))
