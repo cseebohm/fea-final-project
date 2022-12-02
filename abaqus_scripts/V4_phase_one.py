@@ -139,12 +139,12 @@ def output_data (modelName, jobName, fileName, pathName):
     odb.close()
 
 num = 10
-radiusArray = np.random.randint(10,80,num)
+radiusArray = np.random.randint(1,99,num)
 radiusArray.astype(float)
 #radiusArray = radiusArray/1000
 print(radiusArray)
 
-radius_name = 'P1_radius'
+radius_name = 'V1_radius'
 folder_path = 'X:/.win_desktop/cs-ap/data/validation_data/'
 
 # GENERATE MODELS WITH VARYING RADII
@@ -164,7 +164,7 @@ np.savetxt((radius_name + '.csv'), radiusArray,delimiter=',')
 # CONVERT FROM ODB TO CSV AND OUTPUT CSV
 for i in range(num):
     pathName='X:/.win_desktop/deleteme/V4_p'+ str(i)
-    fileName= folder_path + 'P1_p'+ str(i)+'.csv'
+    fileName= folder_path + 'V1_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
 

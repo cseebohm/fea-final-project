@@ -18,10 +18,10 @@ from get_radius import get_radius
 
 "DEFINITIONS: CHECK EVERYTIME"
 #file name initial
-data_path = "/data/training_data/"
+data_path = "/data/validation_data/"
 
-file_string = "P"
-radius_file = "radius_file"
+file_string = "V"
+radius_file = "V1_radius"
 
 #number of data points
 num = 10
@@ -42,4 +42,4 @@ for i in range(num):
 # put radius and max stress into a dict to turn it into a df, then csv file
 output_dict = {'Radius': radiusArray, 'MaxStress': maxStressArray}
 output = pd.DataFrame(output_dict)
-output.to_csv('training_data.csv')
+output.to_csv('validation_data.csv')
