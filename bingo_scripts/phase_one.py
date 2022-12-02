@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 
 from bingo.symbolic_regression.symbolic_regressor import SymbolicRegressor
 
-regressor = SymbolicRegressor(population_size=500, stack_size=10, operators = {"+", "-", "*", "/"},
+regressor = SymbolicRegressor(population_size=500, stack_size=10, operators = {"+", "-", "*"},
                               use_simplification=False, generations=10000, 
                               fitness_threshold=1E-3, max_time=90, max_evals=10000,
-                              clo_threshold=1E-3, scale_max_evals=False)
+                              clo_threshold=1E-3, scale_max_evals=True)
 
 #filepath and name
 file = "/Users/clarissaseebohm/Desktop/ME EN 5510/Project/cs-ap/data/training_data/training_data.csv"
@@ -30,13 +30,18 @@ print("best individual is:", best_individual)
 
 
 #predicting data with the best individual
-pred_y = best_individual.evaluate_equation_at(x)
+x_linear = np.linspace(1,99,30).reshape([-1, 1])
+pred_y = best_individual.evaluate_equation_at(x_linear)
+
+y3 = np.zeros(x_linear.size)
+y3.fill(3.0E6)
 
 
 #plot the best individual
 plt.scatter(x, y)
-plt.plot(x, pred_y, "r")
+plt.plot(x_linear, pred_y, "r")
+plt.plot(x_linear, y3, "y")
 plt.xlabel("Radius")
 plt.ylabel("Max Stress")
-plt.legend(["Actual", "Predicted"])
+plt.legend(["Abaqus Data", "Bingo Prediction", "Infinite Plate Solution"])
 plt.show()
