@@ -18,13 +18,13 @@ from get_radius import get_radius
 
 "DEFINITIONS: CHECK EVERYTIME"
 #file name initial
-data_path = "/data/validation_data/"
+data_path = "/data/training_data_50/"
 
-file_string = "V1_p"
-radius_file = "V1_radius"
+file_string = "P"
+radius_file = "radius_file"
 
 #number of data points
-num = 10
+num = 50
 
 "MAKE AND POPULATE ARRAYS"
 #get radius array
