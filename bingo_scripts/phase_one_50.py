@@ -16,6 +16,8 @@ training_file = "/Users/clarissaseebohm/Desktop/ME EN 5510/Project/cs-ap/data/tr
 #read csv using pandas 
 df_ = pd.read_csv(training_file)
 df = df_.sort_values(by='Radius', axis=0)
+
+#drop data points with radius within 5% of the edge
 df = df.drop(labels=13, axis=0)
 df = df.drop(labels=38, axis=0)
 
@@ -37,10 +39,11 @@ pred_y = best_individual.evaluate_equation_at(x_linear)
 
 #plot the best individual
 plt.scatter(x, y)
-plt.plot(x_linear, pred_y, "r")
-plt.xlabel("Radius")
-plt.ylabel("Max Stress")
-plt.legend(["Abaqus Data", "Bingo Prediction", "Infinite Plate Solution"])
+plt.plot(x_linear, pred_y, 'r')
+plt.title("Abaqus Training Data and Bingo Prediction (Sample Size = 50)")
+plt.xlabel("Radius [mm]")
+plt.ylabel("Max Stress [Pa]")
+plt.legend(["Abaqus Training Data", "Bingo Prediction"])
 plt.show()
 
 "ANALYSIS"
@@ -54,17 +57,28 @@ dfv = dfv_.sort_values(by='Radius', axis=0)
 x_v = dfv['Radius'].to_numpy().reshape([-1, 1])
 y_v = dfv['MaxStress'].to_numpy()
 
+#plot the best individual
+#plt.scatter(x, y)
+plt.scatter(x_v, y_v)
+plt.plot(x_linear, pred_y, 'r')
+#plt.plot(x_linear, y3, "y")
+plt.title("Abaqus Validation Data and Bingo Prediction (Sample Size = 50)")
+plt.xlabel("Radius [mm]")
+plt.ylabel("Max Stress [Pa]")
+plt.legend(["Abaqus Validation Data", "Bingo Prediction"])
+plt.show()
+
 #infinite plate solution
 y3 = np.zeros(x_linear.size)
 y3.fill(3.0E6)
 
 #plot the best individual
-plt.scatter(x, y)
-plt.scatter(x_v, y_v)
-plt.plot(x_linear, pred_y, "r")
-plt.plot(x_linear, y3, "y")
-plt.title("Radius vs Max Stress (Sample Size - 50)")
-plt.xlabel("Radius")
-plt.ylabel("Max Stress")
-plt.legend(["Abaqus Training Data", "Abaqus Validation Data", "Bingo Prediction", "Infinite Plate Solution"])
+#plt.scatter(x, y)
+#plt.scatter(x_v, y_v)
+plt.plot(x_linear, y3)
+plt.plot(x_linear, pred_y, 'r')
+plt.title("Infinite Plate Solution and Bingo Prediction (Sample Size = 50)")
+plt.xlabel("Radius [mm]")
+plt.ylabel("Max Stress [Pa]")
+plt.legend(["Infinite Plate Solution", "Bingo Prediction"])
 plt.show()
