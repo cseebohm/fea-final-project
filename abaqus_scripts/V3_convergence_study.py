@@ -153,7 +153,7 @@ for i in range(10):
 # CONVERT FROM ODB TO CSV AND OUTPUT CSV
 for i in range(10):
     pathName='X:/.win_desktop/deleteme/C2a_p'+ str(i)
-    fileName='X:/.win_desktop/cs-ap/data/convergData/C2a_p'+ str(i)+'.csv'
+    fileName='X:/.win_desktop/cs-ap/data/converg_data/C2a_p'+ str(i)+'.csv'
     jobName = 'Job-'+str(i)
     modelName='Model-'+str(i)
 
