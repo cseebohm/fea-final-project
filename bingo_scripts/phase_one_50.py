@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 from bingo.symbolic_regression.symbolic_regressor import SymbolicRegressor
 
 regressor = SymbolicRegressor(population_size=500, stack_size=16, operators = {"+", "-", "*"},
-                              use_simplification=False, generations=100000, 
-                              fitness_threshold=1E-3, max_time=90, max_evals=100000,
+                              use_simplification=False,  metric="rmse", generations=100000, 
+                              fitness_threshold=1E-3, max_time=120, max_evals=100000,
                               clo_threshold=1E-3, scale_max_evals=False)
 
 #filepath and name
@@ -36,6 +36,9 @@ print("best individual is:", best_individual)
 #predicting data with the best individual
 x_linear = np.linspace(1,99,30).reshape([-1, 1])
 pred_y = best_individual.evaluate_equation_at(x_linear)
+
+fitness = best_individual.fitness
+print("Fitness: ", fitness)
 
 #plot the best individual
 plt.scatter(x, y)
