@@ -1,4 +1,5 @@
-# cs-ap
+# fea-final-project
+Written by Clarissa Seebohm and Audrey Pohl 
 This is a repository for "Finding an Equation for Max Stress on a Plate with a Hole."
 
 Relevant scripts found in "abaqus_scripts" are as follows:
